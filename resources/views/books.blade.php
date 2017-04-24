@@ -5,6 +5,7 @@
 
 <!-- Bootstrap の定型コード -->
 
+
 <div class="panel-body">
   <!-- バリデーションエラーの表示に使用　-->
   @include('common.errors')
@@ -19,11 +20,16 @@
   <!-- 本のタイトル -->
   <div class="form-group">
     <label for="book" class="col-sm-3 control-label">
-      Book
+      BOOK
     </label>
 
     <div class="col-sm-6">
-      <input type="text" name="item_name" id="book-name" class="form-control" />
+      <ul style="list-style:none">
+      <li><p>本の名前<input type="text" name="item_name" id="book-name" class="form-control" /></p></li>
+      <li><p>ページ数<input type="text" name="item_number" id="book-number" class="form-control" /></p></li>
+      <li><p>数量<input type="text" name="item_amount" id="book-amount" class="form-control" /></p></li>
+      <li><p>発刊日<input type="text" name="published" id="published" class="form-control" /></p></li>
+      </ul>
     </div>
   </div>
 
@@ -31,8 +37,8 @@
   <!--本の登録ボタン -->
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-6">
-      <button type="submit" class="btn btn-defauult">
-        <i class="fa fa-plus"></i>Save
+      <button type="submit" class="btn btn-default">
+          <i class="glyphicon glyphicon-plus"></i> Save
       </button>
     </div>
   </div>
@@ -48,10 +54,10 @@
         <!-- テーブルヘッダ -->
         <thead>
           <th>
-             本一覧
+             本の一覧
           </th>
           <th>
-            &hbsp;
+
           </th>
         </thead>
         <!--テーブル本体 -->
@@ -67,12 +73,12 @@
 
               <!-- 本削除ボタン -->
               <td>
-                <form action="{{ url('book/','$book->id') }}" method="POST">
+                <form action="{{ url('book/' .$book->id) }}" method="POST">
                   {{ csrf_field() }}
                   {{ method_field('DELETE') }}
 
-                  <button type="submit" class="btn btn-danger">
-                    <i class="fa fa-trash"></i>削除
+                  <button type="submit" class="btn btn-danger"> <i class="glyphicon glyphicon-trash"></i>
+                      削除
                   </button>
                 </form>
               </td>

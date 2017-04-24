@@ -23,12 +23,15 @@ Route::get('/', function() {
   return view('books',['books' => $books]);
 });
 
-/*　本を追加 */
-Route::get('/books',function(Request $request){
 
+/*　本を追加 */
+Route::post("/books",function(Request $request){
   // Validation
   $validator = Validator::make($request->all(),[
-    'item_name' => 'required|max:255',
+    'item_name' => 'required|min:3|max:255',
+    'item_number' => 'required|min:1|max:3',
+    'item_amount' => 'required|max:6',
+    'published' => 'required',
   ]);
 
   //Validation Error
@@ -41,16 +44,16 @@ Route::get('/books',function(Request $request){
   //Eloquent モデル
   $books = new Book;
   $books->item_name = $request->item_name;
-  $books->item_number = '1';
-  $books->item_amount = '100';
-  $books->published = '2017-03-07 00:00:00';
+  $books->item_number = $request->item_number;
+  $books->item_amount = $request->item_amount;
+  $books->published = $request->published;
   $books->save();
   return redirect('/');
-
 });
 
+
 /*　本を削除 */
-Route::get('/book{book}',function(Book $book){
+Route::delete('/book/{book}',function(Book $book){
     $book->delete();
     return redirect('/');
   //
