@@ -24,6 +24,13 @@ Route::get('/', function() {
 });
 
 
+
+/*　本を詳細を表示 */
+Route::post('/detail/{books}',function(Book $books){
+return view('detail',['books' => $books]);
+
+});
+
 /*　本を追加 */
 Route::post("/books",function(Request $request){
   // Validation

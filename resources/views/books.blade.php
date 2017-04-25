@@ -71,6 +71,19 @@
                 </div>
               </td>
 
+
+              <!--　詳細 -->
+              <td>
+                <form action="{{ url('detail/' .$book->id) }}" method="POST">
+                  {{ csrf_field() }}
+
+                  <button type="submit" class="btn btn-warning"> <i class="glyphicon glyphicon-trash"></i>
+                      詳細
+                  </button>
+                </form>
+              </td>
+
+
               <!-- 本削除ボタン -->
               <td>
                 <form action="{{ url('book/' .$book->id) }}" method="POST">
