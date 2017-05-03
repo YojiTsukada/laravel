@@ -7,13 +7,24 @@ use Illuminate\Http\Request;
 use App\Book;  // Book  モデルを使えるように
 use Validator; // バリデーションを利用するため
 
+use Auth; //認証モデル
+
 class BooksController extends Controller
 {
+
+  //Construct
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
   // Index
   public function index()
   {
     $books = Book::orderBy('created_at','asc')->paginate(5);
-    return view('books',['books' => $books]);
+    $auths = Auth::user();
+
+    return view('books',['books' => $books,'auths'=>$auths ]);
   }
 
   // 更新処理

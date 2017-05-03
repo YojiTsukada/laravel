@@ -102,13 +102,25 @@
     </div>
 
     <div class="row">
-      <div class="col-md-4 col-md-offset-4">
+      <div class="col-md-4 ">
       {{ $books->links()}}
       </div>
-
     </div>
 
+    <div class="row">
+      <div class="col-md-4">
+        <td>
+          id : {{ $auths->id }}
+        </td><br />
+        <td>
+          Name : {{ $auths->name }}
+        </td><br />
+        <td>
+          登録日 : {{ $auths->created_at }}
+        </td><br />
+      </div>
   </div>
+</div>
 </div>
 @endif
   <!-- Book: すでに登録されている本のリスト -->

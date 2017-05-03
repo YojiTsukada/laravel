@@ -34,4 +34,4 @@ Route::delete('/book/{book}','BooksController@delete');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'BooksController@index');
