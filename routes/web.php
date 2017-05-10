@@ -35,3 +35,6 @@ Route::delete('/book/{book}','BooksController@delete');
 Auth::routes();
 
 Route::get('/home', 'BooksController@index');
+
+/* Scaffold */
+Route::resource("tasks","TaskController"); // Add this line in route.PHP
