@@ -9,6 +9,8 @@ use Validator; // バリデーションを利用するため
 
 use Auth; //認証モデル
 
+use Debugbar; // Debugbar
+
 class BooksController extends Controller
 {
 
@@ -23,6 +25,8 @@ class BooksController extends Controller
   {
     $books = Book::orderBy('created_at','asc')->paginate(5);
     $auths = Auth::user();
+
+    Debugbar::info("テスト");
 
     return view('books',['books' => $books,'auths'=>$auths ]);
   }

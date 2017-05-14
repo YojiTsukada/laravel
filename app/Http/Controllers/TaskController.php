@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Task;
 use Illuminate\Http\Request;
 
+use Debugbar;
+
 class TaskController extends Controller {
 
 	/**
@@ -15,7 +17,12 @@ class TaskController extends Controller {
 	 */
 	public function index()
 	{
+
+		Debugbar::info("テスト");
+		Debugbar::error("エラー！！！");
+
 		$tasks = Task::orderBy('id', 'desc')->paginate(10);
+				Debugbar::info($tasks);
 
 		return view('tasks.index', compact('tasks'));
 	}
