@@ -23,12 +23,16 @@ class BooksController extends Controller
   // Index
   public function index()
   {
-    $books = Book::orderBy('created_at','asc')->paginate(5);
+    $books = Book::where('user_id',Auth::user()->id)
+    ->orderBy('created_at','desc')
+    ->paginate(5);
+
     $auths = Auth::user();
 
     Debugbar::info("テスト");
 
-    return view('books',['books' => $books,'auths'=>$auths ]);
+    return view('books',['books' => $books,'auths'=> $auths ]);
+
   }
 
   // 更新処理
@@ -51,7 +55,7 @@ class BooksController extends Controller
     }
 
     //Eloquent モデル
-    $books=Book::find($request->id);
+    $books = Book::where('user_id',Auth::user()->id->find($request->id));
     $books->item_name = $request->item_name;
     $books->item_number = $request->item_number;
     $books->item_amount = $request->item_amount;
@@ -80,6 +84,7 @@ class BooksController extends Controller
 
   //Eloquent モデル
   $books = new Book;
+  $books->user_id = Auth::user()->id;
   $books->item_name = $request->item_name;
   $books->item_number = $request->item_number;
   $books->item_amount = $request->item_amount;
@@ -90,9 +95,10 @@ class BooksController extends Controller
 
 
   // 詳細画面
-  public function detail(Book $books)
+  public function detail($book_id)
   {
-    return view('detail',['books' => $books]);
+    $books = Book::where('user_id',Auth::user()->id->find($book_id));
+    return view('detail',['books' => $books ]);
   }
 
 
